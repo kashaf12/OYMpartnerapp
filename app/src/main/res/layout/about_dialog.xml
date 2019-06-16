@@ -23,39 +23,24 @@
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_gravity="center"
-            android:gravity="left"
+            android:gravity="center"
             android:layout_marginBottom="8dp"
-            android:text="Kashaf Ahmed (16227)"
+            android:text="Kashaf Ahmed (5alcon)"
             android:textColor="@color/primary_dark"
             android:textColorHint="@color/iron"
             android:textSize="14sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"
+        android:text="www.Github.com/kashaf12/oym"
+        android:textColor="@color/primary_dark"
+        android:textColorHint="@color/iron"
+        android:textSize="14sp" />
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_gravity="center"
-            android:gravity="left"
-            android:layout_marginBottom="8dp"
-            android:text="Adit Saxena (16206)"
-
-            android:textColor="@color/primary_dark"
-            android:textColorHint="@color/iron"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_gravity="left"
-            android:gravity="left"
-            android:layout_marginBottom="8dp"
-            android:text="Ashish Kumar (162014)"
-
-            android:textColor="@color/primary_dark"
-            android:textColorHint="@color/iron"
-            android:textSize="14sp" />
 
         <Button
             android:id="@+id/publish_poll1"

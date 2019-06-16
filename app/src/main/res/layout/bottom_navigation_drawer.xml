@@ -51,17 +51,6 @@
             </LinearLayout>
 
         <TextView
-            android:id="@+id/us_gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/user_name"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="2dp"
-            android:layout_toRightOf="@+id/profile_image"
-            android:text="Gender : Male"
-            android:textColor="@android:color/black" />
-
-        <TextView
             android:id="@+id/us_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,6 +60,14 @@
             android:layout_toRightOf="@+id/profile_image"
             android:text="Kashafaahmed@gmail.com"
             android:textColor="@android:color/black" />
+            <TextView
+                android:id="@+id/us_likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="2dp"
+                android:text="Likes : 100"
+                android:textColor="@android:color/black" />
 
         <View
             android:id="@+id/divider_one"

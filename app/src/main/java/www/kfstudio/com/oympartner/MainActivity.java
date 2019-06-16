@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -77,6 +78,7 @@ public class  MainActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         linearLayout.setVisibility(View.INVISIBLE);
         phoneText.setVisibility(View.INVISIBLE);
+        FirebaseApp.initializeApp(getApplicationContext());
         firebaseAuth = FirebaseAuth.getInstance();
         requestStoragePermission();
         handler=new Handler(getApplicationContext().getMainLooper());
@@ -111,13 +113,11 @@ public class  MainActivity extends AppCompatActivity {
                         verifyButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
                                 EditText verificationCode  = dialog.findViewById(R.id.verification_code);
                                 verifyCode = verificationCode.getText().toString();
                                 verifyButton.setClickable(false);
                                 verifyButton.setEnabled(false);
                                 if(!verifyCode.trim().isEmpty()) {
-
                                     credential = PhoneAuthProvider.getCredential(mVerificationId, verifyCode);
                                     signInWithPhoneAuthCredential(credential);
                                 }else{
@@ -309,8 +309,8 @@ public class  MainActivity extends AppCompatActivity {
 
     private  void database(final String phone){
         db = FirebaseFirestore.getInstance();
-        documentReference = db.collection("OYM").document("Photographer")
-                .collection(phone).document("ProfileInformation");
+        documentReference = db.collection("Photographer")
+                .document(phone);
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
