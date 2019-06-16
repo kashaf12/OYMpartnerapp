@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="56dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        >
+
+        <ImageView android:src="@drawable/ic_camera"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:focusedByDefault="true"
+            android:defaultFocusHighlightEnabled="true"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="OYM Partner"
+            android:layout_marginBottom="24dp"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <!-- Email Label -->
+        <LinearLayout
+            android:id="@+id/layout_linear"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+            <com.hbb20.CountryCodePicker
+
+                android:id="@+id/ccp_getFullNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ccp_contentColor="@color/accent"
+                app:ccp_hintExampleNumberType="FIXED_LINE"
+                app:ccp_selectionMemoryTag="getFullNumber"
+                app:ccp_countryPreference="IN,US,NZ"
+                app:ccpDialog_backgroundColor="@color/accent"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="2dp"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+                <EditText
+                    android:id="@+id/emaillog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:focusable="auto"
+
+                    android:inputType="phone"
+                    android:hint="Phone Number"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:visibility="visible"
+            android:id="@+id/btnuserlog"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="Login"/>
+         <ProgressBar
+             android:visibility="gone"
+             android:id="@+id/progress"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:clickable="false"
+             android:layout_margin="16dp"/>
+
+    </LinearLayout>
+</ScrollView>
