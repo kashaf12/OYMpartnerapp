@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="5 yrs"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textColorHint="@color/iron"
                     android:textColor="@android:color/black"
                     android:layout_marginStart="8dp"
@@ -212,6 +212,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="₹ 50/hr"
+                    android:inputType="number"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     />
@@ -233,6 +234,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="50 pics (softcopy)"
+                    android:inputType="number"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     />
@@ -254,6 +256,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="₹ 10/pic (Softcopy)"
+                    android:inputType="number"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     />

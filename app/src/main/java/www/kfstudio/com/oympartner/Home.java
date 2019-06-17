@@ -19,15 +19,20 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -44,8 +49,11 @@ public class Home extends AppCompatActivity {
     BottomAppBar bottomAppBar;
     FirebaseUser currentUser;
     private FirebaseAuth mAuth;
+    RecyclerView recyclerView;
+
     DocumentReference documentReference;
     FirebaseFirestore db=FirebaseFirestore.getInstance();
+    private CollectionReference dbr = db.collection("Booking");
     private FirebaseStorage storage;
     private StorageReference storageReference;
     String us_name="Loading";
@@ -61,6 +69,7 @@ public class Home extends AppCompatActivity {
     String us_extra="Loading";
     String us_likes = "Loading";
     Uri us_profile_image_url,us_image_1,us_image_2,us_image_3,us_image_4;
+    private BookerAdapter bookerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +98,7 @@ public class Home extends AppCompatActivity {
 
             downloadimage(currentUser.getPhoneNumber());
         }
-
+        setUpRecyclerView();
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -205,5 +214,41 @@ public class Home extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bottomappbar_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+    private void setUpRecyclerView() {
+        Query query = dbr.orderBy("booking_time", Query.Direction.DESCENDING);
+        FirestoreRecyclerOptions<Booking> options = new FirestoreRecyclerOptions.Builder<Booking>()
+                .setQuery(query, Booking.class).build();
+        bookerAdapter = new BookerAdapter(options,currentUser.getPhoneNumber());
+        recyclerView = findViewById(R.id.recyclerv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(bookerAdapter);
+        bookerAdapter.setOnItemClickListener(new BookerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                Toast.makeText(Home.this, "Booking has been done!!", Toast.LENGTH_SHORT).show();
+                db.collection("Booking").document(documentSnapshot.getString("booking_time")).update("booking_done",true);
+            }
+        });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bookerAdapter.startListening();
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        bookerAdapter.startListening();
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        bookerAdapter.stopListening();
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        bookerAdapter.stopListening();
     }
 }

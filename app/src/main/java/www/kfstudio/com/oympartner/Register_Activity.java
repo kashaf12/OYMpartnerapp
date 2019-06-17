@@ -187,13 +187,13 @@ public class Register_Activity extends AppCompatActivity {
                 ph_name.setText(bundle.getString("Name"));
                 ph_email.setText(bundle.getString("Email"));
                 ph_website.setText(bundle.getString("Website"));
-                ph_extra.setText(bundle.getString("Extra"));
+                ph_extra.setText("₹"+bundle.getString("Extra")+"/pic(Softcopy)");
                 ph_speciality.setText(bundle.getString("Speciality"));
-                ph_rate.setText(bundle.getString("Rate"));
-                ph_rating.setText(bundle.getString("Rating"));
+                ph_rate.setText("₹"+bundle.getString("Rate")+"/hr");
+                ph_rating.setText(bundle.getString("Rating")+"/5");
                 ph_description.setText(bundle.getString("Description"));
-                ph_no_of_pic.setText(bundle.getString("NoPic"));
-                ph_experience.setText(bundle.getString("Experience"));
+                ph_no_of_pic.setText(bundle.getString("NoPic")+"pics(Softcopy)");
+                ph_experience.setText(bundle.getString("Experience")+"yrs");
                 ph_location.setText(bundle.getString("Location"));
                 Glide.with(this)
                         .load(Uri.parse(bundle.getString("Image")))
@@ -264,16 +264,16 @@ public class Register_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 ph_name_string = ph_name.getText().toString().trim();
                 ph_email_string = ph_email.getText().toString().trim();
-                ph_experience_string = ph_experience.getText().toString().trim() + " yrs";
+                ph_experience_string = ph_experience.getText().toString().trim();
                 ph_phone_string = ph_phone.getText().toString().trim();
                 ph_location_string = ph_location.getText().toString().trim();
-                ph_rating_string = ph_rating.getText().toString().trim()+ "/5";
+                ph_rating_string = ph_rating.getText().toString().trim();
                 ph_description_string = ph_description.getText().toString().trim();
                 ph_website_string = ph_website.getText().toString().trim();
                 ph_speciality_string = ph_speciality.getText().toString().trim();
-                ph_rate_string = "₹"+ph_rate.getText().toString().trim()+"/hr";
-                ph_extra_string = "₹"+ph_extra.getText().toString().trim()+"/pic (Softcopy)";
-                ph_no_of_pic_string = ph_no_of_pic.getText().toString().trim()+" pics (softcopy)";
+                ph_rate_string = ph_rate.getText().toString().trim();
+                ph_extra_string = ph_extra.getText().toString().trim();
+                ph_no_of_pic_string = ph_no_of_pic.getText().toString().trim();
 
                 if (!(TextUtils.isEmpty(ph_name_string) ||
                         TextUtils.isEmpty(ph_email_string) ||
@@ -312,7 +312,6 @@ public class Register_Activity extends AppCompatActivity {
                                     @Override
                                     public void accept(Throwable throwable) {
                                         throwable.printStackTrace();
-                                        showError(throwable.getMessage());
                                     }
                                 });
                     }
@@ -476,7 +475,7 @@ public class Register_Activity extends AppCompatActivity {
 
     public void customCompressImage() {
         if (actualImage == null) {
-            showError("Please choose an image!");
+            Toast.makeText(this, "Please choose an image!", Toast.LENGTH_SHORT).show();
         } else {
             new Compressor(this)
                     .setMaxWidth(80)
@@ -539,15 +538,11 @@ public class Register_Activity extends AppCompatActivity {
                         @Override
                         public void accept(Throwable throwable) {
                             throwable.printStackTrace();
-                            showError(throwable.getMessage());
                         }
                     });
         }
     }
 
-    public void showError(String errorMessage) {
-        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
-    }
 
     private void uploadPoll(String up_name, String up_phone, String up_email, String up_experience,
                             String up_location, String up_rating, String up_website, String up_description,String up_speciality,
