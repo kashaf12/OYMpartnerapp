@@ -4,7 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/app_bar_fav"
         android:icon="@drawable/ic_perm_identity_black_24dp"
         app:showAsAction="ifRoom"
         android:title="Profile" />

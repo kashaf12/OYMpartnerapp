@@ -219,7 +219,7 @@ public class Home extends AppCompatActivity {
         Query query = dbr.orderBy("booking_time", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Booking> options = new FirestoreRecyclerOptions.Builder<Booking>()
                 .setQuery(query, Booking.class).build();
-        bookerAdapter = new BookerAdapter(options,currentUser.getPhoneNumber());
+        bookerAdapter = new BookerAdapter(this,options,currentUser.getPhoneNumber());
         recyclerView = findViewById(R.id.recyclerv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(bookerAdapter);

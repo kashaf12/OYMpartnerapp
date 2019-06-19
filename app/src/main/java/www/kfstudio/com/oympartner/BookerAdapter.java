@@ -1,5 +1,6 @@
 package www.kfstudio.com.oympartner;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -27,17 +29,24 @@ public class BookerAdapter extends FirestoreRecyclerAdapter<Booking ,BookerAdapt
     private StorageReference storageReference;
     Uri us_profile_image_url;
     private String ph_phone;
+    private Context mContext;
     View v;
-
-    public BookerAdapter(@NonNull FirestoreRecyclerOptions<Booking> options, String ph_phone) {
+    private int all;
+    public BookerAdapter(Context mContext,@NonNull FirestoreRecyclerOptions<Booking> options, String ph_phone) {
         super(options);
+        this.mContext=mContext;
         this.ph_phone = ph_phone;
     }
 
     @Override
     protected void onBindViewHolder(@NonNull BookerHolder bookerHolder, int i, @NonNull Booking booking) {
     if(ph_phone.equals(booking.getBooking_for())){
-        downloadimage(booking.getBooker_phone());
+        all=convertDpToPx(mContext,8);
+        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(all,all,all,all);
+        downloadimage(booking.getBooker_phone(),bookerHolder);
+        bookerHolder.itemView.setVisibility(View.VISIBLE);
+        bookerHolder.itemView.setLayoutParams(layoutParams);
      bookerHolder.name.setText(booking.getBooker_name());
      bookerHolder.email.setText(booking.getBooker_email());
      bookerHolder.phone.setText(booking.getBooker_phone());
@@ -45,11 +54,14 @@ public class BookerAdapter extends FirestoreRecyclerAdapter<Booking ,BookerAdapt
      if(booking.getBooking_done()){
          bookerHolder.end.setText("DONE");
          bookerHolder.end.setClickable(false);
+     }else{
+         bookerHolder.end.setText("END");
+         bookerHolder.end.setClickable(true);
      }
-        Glide.with(v).load(us_profile_image_url)
-                .apply(new RequestOptions().placeholder(R.drawable.progress_animation))
-                .apply(RequestOptions.centerCropTransform())
-                .into(bookerHolder.profile_image);
+    }else{
+
+        bookerHolder.itemView.setVisibility(View.GONE);
+        bookerHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
     }
     }
 
@@ -64,6 +76,7 @@ public class BookerAdapter extends FirestoreRecyclerAdapter<Booking ,BookerAdapt
     TextView name,email,phone,time;
     CircularImageView profile_image;
     TextView end;
+    CardView cardview;
     public BookerHolder(@NonNull View itemView) {
         super(itemView);
         name=itemView.findViewById(R.id.name);
@@ -71,11 +84,12 @@ public class BookerAdapter extends FirestoreRecyclerAdapter<Booking ,BookerAdapt
         phone=itemView.findViewById(R.id.phone);
         time=itemView.findViewById(R.id.time);
         end=itemView.findViewById(R.id.end);
+        cardview=itemView.findViewById(R.id.cardview);
         profile_image=itemView.findViewById(R.id.profile_image1);
-end.setOnClickListener(new View.OnClickListener() {
+        end.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-int position =getAdapterPosition();
+        int position =getAdapterPosition();
         if(position != RecyclerView.NO_POSITION && listener!=null){
             listener.onItemClick(getSnapshots().getSnapshot(position),position);
     }
@@ -91,7 +105,7 @@ int position =getAdapterPosition();
         this.listener=listener;
 
     }
-    private void downloadimage(String phone){
+    private void downloadimage(String phone, final BookerHolder bookerHolder){
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReferenceFromUrl("gs://oym-1e52d.appspot.com/"+phone+"/");
@@ -99,12 +113,15 @@ int position =getAdapterPosition();
             @Override
             public void onSuccess(Uri uri) {
 
-                us_profile_image_url = uri;
+                Glide.with(mContext.getApplicationContext()).load(uri)
+                        .apply(new RequestOptions().placeholder(R.drawable.progress_animation))
+                        .apply(RequestOptions.centerCropTransform())
+                        .into(bookerHolder.profile_image);
             }
         });
 
     }
-    public String getURLForResource(int resourceId) {
-        return Uri.parse("android.resource://" + R.class.getPackage().getName() + "/" + resourceId).toString();
+    public int convertDpToPx(Context context, int dp) {
+        return (int) (dp * context.getResources().getDisplayMetrics().density);
     }
 }

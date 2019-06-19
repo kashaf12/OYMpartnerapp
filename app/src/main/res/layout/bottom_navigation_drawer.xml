@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation_view_layout"
     android:layout_width="match_parent"
     android:background="@color/accent"
     android:layout_height="wrap_content"
@@ -18,7 +17,8 @@
             android:layout_width="64dp"
             android:layout_margin="8dp"
             android:layout_height="64dp"
-            app:srcCompat="@drawable/blank_profile_picture_973460_960_720" />
+            app:srcCompat="@drawable/blank_profile_picture_973460_960_720"
+            android:contentDescription="TODO" />
         <LinearLayout
             android:layout_margin="8dp"
             android:layout_width="match_parent"
@@ -70,7 +70,6 @@
                 android:textColor="@android:color/black" />
 
         <View
-            android:id="@+id/divider_one"
             android:layout_width="match_parent"
             android:layout_height="2dip"
             android:layout_below="@+id/us_email"

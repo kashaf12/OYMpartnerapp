@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/parent_ll"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -16,7 +14,6 @@
         android:src="@drawable/blank_profile_picture_973460_960_720"/>
 
     <ScrollView
-        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp">
@@ -312,7 +309,6 @@
 
             </LinearLayout>
             <View
-                android:id="@+id/divider_one"
                 android:layout_width="match_parent"
                 android:layout_height="2dip"
                 android:layout_below="@+id/us_email"
@@ -341,7 +337,7 @@
                         android:background="@color/iron"
                         android:src="@drawable/baseline_add_white_24"
 
-                        />
+                        android:contentDescription="TODO" />
 
 
                     <ImageView
@@ -352,7 +348,7 @@
 
                         android:background="@color/iron"
                         android:src="@drawable/baseline_add_white_24"
-                        />
+                        android:contentDescription="TODO" />
 
                     <ImageView
                         android:id="@+id/ph_image_3"
@@ -361,14 +357,14 @@
                         android:layout_marginEnd="8dp"
                         android:background="@color/iron"
                         android:src="@drawable/baseline_add_white_24"
-                        />
+                        android:contentDescription="TODO" />
                     <ImageView
                         android:id="@+id/ph_image_4"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:background="@color/iron"
                         android:src="@drawable/baseline_add_white_24"
-                        />
+                        android:contentDescription="TODO" />
 
                 </LinearLayout>
             </HorizontalScrollView>
